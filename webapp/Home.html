@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home</title>
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Pizza Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //Custom Theme files -->
+<link rel="stylesheet" href="css/orbit-1.2.3.css">
+<link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+<link href="css/style.css" type="text/css" rel="stylesheet" media="all">
+<!--js-->
+
+<script src="js/jquery-1.11.1.min.js"></script> 
+<script src="js/modernizr.custom.js"></script>
+<script type="text/javascript" src="js/jquery.orbit-1.2.3.js"></script>
+<!-- //js -->
+<script>
+	$(window).load(function() {
+        $('#featured').orbit();
+    });
+
+	$(document).ready(function () {
+	    size_li = $("#myList li").size();
+	    x=1;
+	    $('#myList li:lt('+x+')').show();
+	    $('#loadMore').click(function () {
+	        x= (x+1 <= size_li) ? x+1 : size_li;
+	        $('#myList li:lt('+x+')').show();
+	    });
+	    $('#showLess').click(function () {
+	        x=(x-1<0) ? 1 : x-1;
+	        $('#myList li').not(':lt('+x+')').hide();
+	    });
+	});
+</script>
+</head>
+<body>
+	<!--banner-->
+	<div class="banner">
+		<div class="banner-info">
+			<div class="container">
+				<div class="logo">
+					<p>
+		            	<img src = "images/serendipity.png" style="width:220px;height:100px;"/>
+		            </p>
+					<h2>The joy of a good deal</h2>
+				</div>			
+				<!--navigation-->
+				<div class="top-nav">
+					<nav class="navbar navbar-default">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav navbar-center cl-effect-14">
+								<li><a href="index.html" class="active">Home</a></li>
+								<li><a href="Food.html">Food</a></li>					
+								<li><a href="Bar.html">Bar</a></li>
+								<li><a href="Entertainment.html">Entertain</a></li>	
+								<li><a href="Others.html">Others</a></li>
+							</ul>	
+							<div class="clearfix"> </div>
+						</div>	
+					</nav>		
+				</div>	
+				<!--navigation-->
+			</div>
+		</div>
+	</div>
+	<!--//banner-->
+	<!--banner-bottom-->
+	<div class="banner-bottom">
+		<div class="container">
+			<div class="banner-text">
+				<h3>Recommendation</h3>
+				<p> Based on Transaction History</p>
+				<!-- <a href="#" class="btn btn-1 btn-1b">More</a> -->
+			</div>
+			
+			<br><br><br><br><br>
+			<br><br><br><br><br>
+			<div class="container">
+				<h3 class="title">Our Team</h3>
+				<div class="team-grids">
+					<div class="col-md-3 team-grid">
+						<img src="images/icon1.jpg" style="width:150px;height:150px;" alt="">
+						<h6>Parel Mohneesh</h6>
+						<p></p>
+					</div>
+					<div class="col-md-3 team-grid">
+						<img src="images/icon2.jpg" style="width:150px;height:150px;" alt="">
+						<h6>Poduri Rohit</h6>
+						<p></p>
+					</div>
+					<div class="col-md-3 team-grid">
+						<img src="images/icon3.jpg" style="width:150px;height:150px;" alt="">
+						<h6>Alex Price</h6>
+						<p></p>
+					</div>
+					<div class="col-md-3 team-grid">
+						<img src="images/icon4.jpg" style="width:150px;height:150px;" alt="">
+						<h6>An Wang</h6>
+						<p></p>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+			<!-- <div class="welcome">
+				<h3 class="title">Overall Recommendation</h3>
+				<p> The coupons we guess you would like </p>
+				<div class="welcome-info">
+					<div class="col-md-6 welcome-grids">
+						<div class="welcome-img">
+							<img src="images/img1.jpg" class="img-responsive zoom-img" alt=""/>
+						</div>
+					</div>
+					<div class="col-md-6 welcome-grids">
+						<div class="welcome-img">
+							<img src="images/img2.jpg" class="img-responsive zoom-img" alt=""/>
+						</div>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<br>
+				<div class="welcome-info">
+					<div class="col-md-6 welcome-grids">
+						<div class="welcome-img">
+							<img src="images/img1.jpg" class="img-responsive zoom-img" alt=""/>
+						</div>
+					</div>
+					<div class="col-md-6 welcome-grids">
+						<div class="welcome-img">
+							<img src="images/img2.jpg" class="img-responsive zoom-img" alt=""/>
+						</div>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<p>something</p>			
+			</div> -->
+			
+		</div>
+	</div>
+	<!--//banner-bottom-->
+	<!-- <div class="about-team">
+			<div class="container">
+				<h3 class="title">Our Team</h3>
+				<div class="team-grids">
+					<div class="col-md-3 team-grid">
+						<img src="images/icon1.jpg" style="width:150px;height:150px;" alt="">
+						<h6>Parel Mohneesh</h6>
+						<p></p>
+					</div>
+					<div class="col-md-3 team-grid">
+						<img src="images/icon2.jpg" style="width:150px;height:150px;" alt="">
+						<h6>Poduri Rohit</h6>
+						<p></p>
+					</div>
+					<div class="col-md-3 team-grid">
+						<img src="images/icon3.jpg" style="width:150px;height:150px;" alt="">
+						<h6>Alex Price</h6>
+						<p></p>
+					</div>
+					<div class="col-md-3 team-grid">
+						<img src="images/icon4.jpg" style="width:150px;height:150px;" alt="">
+						<h6>An Wang</h6>
+						<p></p>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+	</div> -->
+	<!--menu-->
+	
+    
+	<!--footer-->
+	<div class="footer">
+		<div class="container">
+			<div class="col-md-3 footer-left">
+				<h4>Address</h4>
+				<ul>
+					<li>New York Restaurant</li>
+					<li>3926 Anmoore Road</li>
+					<li>New York, NY 10014</li>
+					<li>718-749-1714</li>
+				</ul>				
+			</div>
+			<div class="col-md-3 footer-left">
+				<h4>Popular</h4>
+				<ul>
+					<li><a href="#">Proin placerat</a></li>
+					<li><a href="#">Ipsum et rutrum</a></li>
+					<li><a href="#">Proin semper utr</a></li>
+					<li><a href="#">ligula sit amet</a></li>
+				</ul>
+			</div>
+			<div class="col-md-3 footer-left">
+		 		<h4>Details</h4>
+				<ul>
+					<li><a href="about.html">About</a></li>
+					<li><a href="#">Careers</a></li>
+					<li><a href="#">Privacy Policy</a></li>
+					<li><a href="contact.html">Contact</a></li>
+				</ul>
+			</div>
+			<div class="col-md-3 footer-right">
+				<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+				<div class="icons">
+				<ul>
+					<li><a href="#" class="twitter"> </a></li>
+					<li><a href="#" class="twitter facebook"> </a></li>
+					<li><a href="#" class="twitter chrome"> </a></li>
+					<li><a href="#" class="twitter pinterest"> </a></li>
+					<li><a href="#" class="twitter linkedin"> </a></li>
+				</ul>
+			</div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	<!--//footer-->
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/bootstrap.js"></script>
+</body>
+</html>

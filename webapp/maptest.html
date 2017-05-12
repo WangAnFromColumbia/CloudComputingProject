@@ -1,0 +1,31 @@
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script>
+    var myCenter = new google.maps.LatLng(51.528308, -0.3817765);
+
+    function initialize() {
+           var mapProp = {
+            center:myCenter,
+            zoom:15,
+            mapTypeId:google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp); 
+
+        var marker = new google.maps.Marker({
+            position: myCenter,
+            icon: {
+                url: '../pizza/images/marker.png',
+                size: new google.maps.Size(70, 86), //marker image size
+                origin: new google.maps.Point(0, 0), // marker origin
+                anchor: new google.maps.Point(35, 86) // X-axis value (35, half of marker width) and 86 is Y-axis value (height of the marker).
+            }
+        });
+
+        marker.setMap(map);
+
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+<body>
+<div id="googleMap" style="width:500px;height:380px;"></div>
+</body>

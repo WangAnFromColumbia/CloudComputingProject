@@ -1,0 +1,141 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Login</title>
+        <!-- CSS -->
+        <!-- <link rel="stylesheet" href="assets/css/reset.css"> -->
+        <link rel="stylesheet" href="supersized.css">
+        <!-- <link rel="stylesheet" href="assets/css/style.css">    -->
+        <link rel="stylesheet" type="text/css" href="styles.css">
+		<!-- <style type="text/css">
+		body,td,th { font-family: "Source Sans Pro", sans-serif; }
+		/* body { background-color: #2B2B2B; } */
+		</style> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+        <div class="page-container">
+		    <div class="wrapper">
+		        <div class="container">
+		            <strong><span style="font-weight: bold;font-size: 25px;">Serendipity</span></strong>
+		            <form class="form">
+		                <input id="usernameinput" type="text" name="name" placeholder="Username">
+		                <input type="password" name="password" placeholder="Password">
+		                <button type="button" id="login-button" onclick="myFunction()">Login</button>
+		            </form>
+		        </div>
+		    </div>
+		</div>
+
+<script type="text/javascript">   
+
+</script>  
+
+		<script type="text/javascript">
+			function myFunction() {
+				var userid = document.getElementById("usernameinput").value;
+				console.log(userid);
+				localStorage.setItem("userid", userid);
+				console.log(localStorage.getItem("userid"));
+
+    			descrip_array = new Array("30$ all you can eat buffet", "Eastcote Tandoori","10% cashback", "Arcade restaurant");
+		    	var str = JSON.stringify(descrip_array); 
+				localStorage.setItem("descripFood", str);
+
+				var couponID_array = new Array();
+
+
+			var url = "https://5dplp7qf5g.execute-api.us-east-1.amazonaws.com/stage/coupons?operation=read&userid=" + userid;
+
+				$.ajax({
+			        url: url,
+			        async:false,
+			        type: 'GET',
+          			contentType: 'application/json',
+			        success: function(callback){
+			        	console.log("*** success ***");
+			        	console.log(callback);
+			        	items = callback['items'];
+			        	
+			        	var i;
+			        	for (i = 0; i < 10; i++) {
+			        		couponID_array[i] = items[i].coupon_Id;
+			        	}
+			        	var str = JSON.stringify(couponID_array); 
+		    			localStorage.setItem("couponID_array", str);
+			        },
+			        error: function(err){
+			        	console.log("* fail *");
+			            console.error(err);
+			        }
+			      });
+
+				window.location.replace('Home.html');
+			// 	couponID_array = new Array("134142", "456832","736534", "234314","684655","23451", "413413241", "1234123");
+		    	// str = JSON.stringify(couponID_array); 
+		    	// localStorage.setItem("couponID_array", str);
+
+		 //    	couponID_array_2 = new Array("8723123", "3456366","7568567", "5678675","142341","1234234","54677541","136743");
+		 //    	str = JSON.stringify(couponID_array_2); 
+		 //    	localStorage.setItem("couponID_array_2", str);
+				
+			// 	temp1 = localStorage.getItem("couponID_array");   
+   //  		console.log(" fuuuck couponID_array");	
+   //  		console.log(temp1);
+
+			// 	if (input == "15837") {
+			// 		localStorage.setItem("user", "User1");	
+			// console.log(" ** fuuuck user ** ");	
+   //  		console.log(localStorage.getItem("user"));
+
+			// 		window.location.href='Home.html';
+			// 	} else if (input == "92621") {
+			// 		localStorage.setItem("user", "User2");	
+			// 		window.location.href='Home.html';
+			// 	} else {
+			// 		alert("Wrong username or password");
+			// 	}
+			
+			
+
+
+				// var result;
+			   //    $.ajax({
+			   //      url: "https://5dplp7qf5g.execute-api.us-east-1.amazonaws.com/stage/login",
+			   //      async:false,
+			   //      type: 'GET',
+			   //      dataType: "json",
+      //     			contentType: 'application/json',
+			   //      success: function(callback){
+			   //      	console.log("*** success ***");
+			   //          result = callback;
+			   //      },
+			   //      error: function(err){
+			   //      	console.log("*** fail ***");
+			   //          console.error(err);
+			   //      }
+			   //    });
+
+			   //    console.log(result);
+			   // alert("before window.location set");
+
+			   
+				// window.location.replace('http://www.google.com');
+				// alert("after window.location set");
+			      
+
+			}
+
+				
+		</script>
+
+		<!-- <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script> -->
+		<!-- Javascript -->
+		<script src="jquery-1.8.2.min.js"></script>
+		<script src="supersized.3.2.7.min.js"></script>
+		<script src="supersized-init.js"></script>
+		<!-- <script src="assets/js/scripts.js"></script> -->
+
+</body>
+</html>

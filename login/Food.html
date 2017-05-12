@@ -1,0 +1,477 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title> index page </title>
+    <link rel="stylesheet" href="css/orbit-1.2.3.css">
+    <!-- <link rel="stylesheet" href="css/lanrenzhijia.css"> -->
+
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="all">
+
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<!-- 麻痹 这个要放哪里才有用？？？ -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSOqBjEuRQVs5Ny2tpsfq9RWvhG7H_cuY&callback=initMap">
+</script>
+    <!-- <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.orbit-1.2.3.js"></script>
+
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+
+<script>
+
+    myCenter = new google.maps.LatLng(40.8073, -73.9624);
+
+    function initialize() {
+        // myCenter = new google.maps.LatLng(lat, lang);
+
+           var mapProp = {
+            center:myCenter,
+            zoom:16,
+            mapTypeId:google.maps.MapTypeId.ROADMAP
+        };
+        var map = new google.maps.Map(document.getElementById("map"), mapProp); 
+
+        var marker = new google.maps.Marker({
+            position: myCenter
+        });
+
+        marker.setMap(map);
+
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
+    $(window).load(function() {
+        window.userid = localStorage.getItem("userid");
+        console.log("fuckkkk userid: " + userid);
+
+
+        var lat = 40.79;
+        var lang = -73.96 ;
+        myCenter = new google.maps.LatLng(lat, lang);
+        initialize();
+
+        // 得到count
+        window.count = 0;
+
+        window.couponIdArray = localStorage.getItem("couponID_array");
+        couponIdArray = JSON.parse(couponIdArray);
+
+        //设置背景
+        var temp = "url('images/countUser1Food" + (count + 1) + ".jpg')";
+        document.getElementById("mostoutdiv").style.backgroundImage=temp;
+
+        //设置description
+        temp = localStorage.getItem("descripFood");
+        console.log(temp);
+        window.descripArray = JSON.parse(temp);
+        document.getElementById("couponID").innerHTML="Coupon id : " + couponIdArray[count];
+        document.getElementById("description").innerHTML="Description : " + descripArray[count % 4];
+
+    });
+    
+    
+    function next() {
+        // 得到count 加一
+
+        count = count + 1;
+        console.log("count : " + count);
+
+        //设置背景
+        var temp = "url('images/countUser1Food" + (count + 1) + ".jpg')";
+        document.getElementById("mostoutdiv").style.backgroundImage=temp;
+
+        //设置description
+        document.getElementById("couponID").innerHTML="Coupon id : " + couponIdArray[count];
+        // document.getElementById("description").innerHTML="Description : " + descripArray[count];
+
+        //设置map
+        var lat = 40.79 + Math.random() * 0.01;
+        var lang = -73.96 + Math.random() * 0.01;
+        // console.log("...");
+        // console.log(lat);
+        // console.log(lang);
+        myCenter = new google.maps.LatLng(lat, lang);
+        initialize();
+    }
+
+    // function deleteCoupon() {
+    //     var userid = localStorage.getItem("userid");
+
+    //     console.log("come to deleteCoupon");
+    //     console.log("userid : " + userid );
+    //     console.log("coupon_Id : " + couponIdArray[count] );
+
+
+    //     var url = "https://5dplp7qf5g.execute-api.us-east-1.amazonaws.com/stage/coupons?operation=delete&userid=" + userid + "&coupon_Id=" + couponIdArray[count];
+
+    //             $.ajax({
+    //                 url: url,
+    //                 async:false,
+    //                 type: 'GET', // 用GET就好了，触发同一个Lambda
+    //                 contentType: 'application/json',
+    //                 success: function(callback){
+    //                     console.log("*** success ***");
+    //                 },
+    //                 error: function(err){
+    //                     console.log("* fail *");
+    //                     console.error(err);
+    //                 }
+    //               });
+    // }
+
+    function abortFunction() {
+        // var userid = localStorage.getItem("userid");
+        var coupon_Id = couponIdArray[count];
+
+        console.log("abort userid : " + userid + " coupon_Id : " + coupon_Id);
+
+        var url = "https://5dplp7qf5g.execute-api.us-east-1.amazonaws.com/stage/coupons?&userid=" + userid + "&coupon_Id=" + coupon_Id +"&rating=0";
+        
+        url = "https://5dplp7qf5g.execute-api.us-east-1.amazonaws.com/stage/coupons";
+
+                $.ajax({
+                     "async": true,
+  "crossDomain": true,
+  "url": "https://5dplp7qf5g.execute-api.us-east-1.amazonaws.com/stage/coupons",
+  "method": "POST",
+  "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache",
+  },
+  "processData": false,
+
+                    data: JSON.stringify({
+                        "userid" : parseInt(userid),
+                        "coupon_Id" : parseInt(coupon_Id),
+                        "rating" : 0
+                    }),
+
+                    success: function(callback){
+                        console.log("*** success ***");
+                    },
+                    error: function(err){
+                        console.log("* fuck fail *");
+                        console.error(err);
+                    }
+                  });
+
+        next();
+    }
+
+    function buyFunction() {
+        var userid = localStorage.getItem("userid");
+        var coupon_Id = couponIdArray[count];
+
+        console.log("buy userid : " + userid + " coupon_Id : " + coupon_Id);
+
+        var url = "https://5dplp7qf5g.execute-api.us-east-1.amazonaws.com/stage/coupons?&userid=" + userid + "&coupon_Id=" + coupon_Id +"&rating=7";
+
+        url = "https://5dplp7qf5g.execute-api.us-east-1.amazonaws.com/stage/coupons";
+
+                $.ajax({
+                     "async": true,
+  "crossDomain": true,
+  "url": "https://5dplp7qf5g.execute-api.us-east-1.amazonaws.com/stage/coupons",
+  "method": "POST",
+  "headers": {
+    "content-type": "application/json",
+    "cache-control": "no-cache",
+  },
+  "processData": false,
+
+                    data: JSON.stringify({
+                        "userid" : parseInt(userid),
+                        "coupon_Id" :  parseInt(coupon_Id),
+                        "rating" : 7
+                    }),
+
+                    success: function(callback){
+                        console.log("*** success ***");
+                    },
+                    error: function(err){
+                        console.log("* fuck fail *");
+                        console.error(err);
+                    }
+                  });
+
+           $.ajax({
+                    url: "https://5dplp7qf5g.execute-api.us-east-1.amazonaws.com/stage/email",
+                    async:true,
+                    type: 'GET',
+                    contentType: 'application/json',
+                    success: function(callback){
+                        console.log("*** success ***");
+                    },
+                    error: function(err){
+                        console.log("*** fail ***");
+                        console.error(err);
+                    }
+                  });
+
+
+
+        next();
+    }
+
+
+</script>
+
+    <style>
+        .mostout {
+            top: 0px;
+            height: 600px;
+            /*background-color: #CADDE1;*/
+            /*background-image:url('images/bg1.png');*/
+            background-image:url('images/bbq1.jpeg');
+            background-size:cover;
+        }
+        .myClass1 {
+            text-align:center;
+            margin:0 auto;
+            height: 500px;
+            width: 1050px;
+            top:100px;
+        }
+        .left {
+            float:left;
+            top: 50px;
+            height: 450px;
+        }
+        .right {
+            float:right;
+            top: 50px;
+            height: 450px;
+        }
+        #map {
+            height: 350px;
+            width: 400px;
+        }
+
+        #featured { 
+  width: 500px;
+  height: 450px;
+  background: #000 url('images/loading.gif') no-repeat center center;
+  overflow: hidden; 
+}
+
+    #abortbutton {
+            background: rgba(255, 255, 255, 0.5);
+            height: 50px;
+            width: 200px;
+            left:800px;
+            top:400px
+        }
+
+    #paybutton {
+            background: rgba(255, 255, 255, 0.5);
+            height: 50px;
+            width: 200px;
+            left:1000px;
+            top:400px
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <!--banner-->
+    <div class="banner about-bnr">
+        <div class="banner-info about-bnr-info">
+            <div class="container">
+                <div class="logo">
+                    <p>
+                        <img src = "images/serendipity.png" style="width:220px;height:100px;"/>
+                    </p>
+                    <h2>The joy of a good deal</h2>
+                </div>          
+                <!--navigation-->
+                <div class="top-nav">
+                    <nav class="navbar navbar-default">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-center cl-effect-14">
+                                <li><a href="Home.html" class="active">Home</a></li>
+                                <li><a href="Food.html">Food</a></li>                   
+                                <li><a href="Bar.html">Bar</a></li>
+                                <li><a href="Entertainment.html">Entertain</a></li> 
+                                <li><a href="Others.html">Others</a></li>
+                            </ul>   
+                            <div class="clearfix"> </div>
+                        </div>  
+                    </nav>      
+                </div>  
+                <!--navigation-->
+            </div>
+        </div>
+    </div>
+    <!--//banner-->
+
+    <div class="mostout" id="mostoutdiv">
+        <br><br>
+        <br><br><br>
+
+        <div class="myClass1">
+        <div class="left">
+                <br><br><br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br><br><br> 
+
+                <p id="couponID" style="font-family:'OleoScript-Regular';font-size: 2em; color: #fff;">
+                    some description here
+                </p>
+                <p id="description"` style="font-family:'OleoScript-Regular';font-size: 2em; color: #fff;">
+                    some description here
+                </p>
+                
+        </div>
+        
+        <div class="right">
+            <div id="map">BBB</div>
+            <br>
+            <div> 
+                <button type="button" class="btn btn-outline-danger" id="abortbutton" onclick="abortFunction()" style="font-family:'OleoScript-Regular';font-size: 2em;"> Abort </button>
+                <button type="button" class="btn btn-outline-info" id="paybutton" data-toggle="modal" data-target="#myModal" style="font-family:'OleoScript-Regular';font-size: 2em;"> Buy </button>
+
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Make Payment</h4>
+      </div>
+      <div class="modal-body">
+
+                        <form action="/transaction/" method="POST" id="payment-form">
+                  <span class="payment-errors"></span>
+
+                  <div class="form-row">
+                    <label>
+                      <span>Card Number</span>
+                      <input type="text" size="20" data-stripe="number" value="4242424242424242">
+                    </label>
+                  </div>
+
+                  <div class="form-row">
+                    <label>
+                      <span>Expiration (MM/YY)</span>
+                      <input type="text" size="2" data-stripe="exp_month" value="08">
+                    </label>
+                    <span> / </span>
+                    <input type="text" size="2" data-stripe="exp_year" value="20">
+                  </div>
+
+                  <div class="form-row">
+                    <label>
+                      <span>CVC</span>
+                      <input type="text" size="4" data-stripe="cvc" value="213">
+                    </label>
+                  </div>
+
+                  <input onclick="buyFunction()" id="paysubmit" class="btn btn-primary" value="Submit Payment" data-toggle="modal" data-target="#myModal">
+                </form>
+
+      </div>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+    
+    <!--footer-->
+    <div class="footer">
+        <div class="container">
+            <div class="col-md-3 footer-left">
+                <h4>Join in</h4>
+                <ul>
+                    <li>If you want to join</li>
+                    <li>in and add the coupon</li>
+                    <li>of your business, please</li>
+                    <li>contact us</li>
+                </ul>               
+            </div>
+            <div class="col-md-3 footer-left">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="#">Phone number</a></li>
+                    <li><a href="#">123-123-123</a></li>
+                    <li><a href="#">Email</a></li>
+                    <li><a href="#">xxx@columbia.edu</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 footer-left">
+                <h4>Details</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="#">Advertisement</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 footer-right">
+                <p>Copyright &copy; 2017. Cloud Computing final project<a href="http://www.cssmoban.com/" target="_blank" title="模板之家"></a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank"></a></p>
+                <div class="icons">
+                <ul>
+                    <li><a href="#" class="twitter"> </a></li>
+                    <li><a href="#" class="twitter facebook"> </a></li>
+                    <li><a href="#" class="twitter chrome"> </a></li>
+                    <li><a href="#" class="twitter pinterest"> </a></li>
+                    <li><a href="#" class="twitter linkedin"> </a></li>
+                </ul>
+            </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!--//footer-->
+
+    
+
+
+    
+    
+</body>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
