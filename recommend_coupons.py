@@ -16,6 +16,49 @@ from math import sqrt
 ACCESS_KEY_2 = ""
 SECRET_KEY_2 = ""
 
+dynamodb = boto3.resource("dynamodb",aws_access_key_id=ACCESS_KEY_2,
+                          aws_secret_access_key=SECRET_KEY_2, region_name = 'us-east-1')
+bucket_name = 'ccfinalproject'
+
+conn = boto.connect_s3(ACCESS_KEY_2,SECRET_KEY_2,host='s3.amazonaws.com')
+
+bucket = conn.get_bucket(bucket_name)
+
+table = dynamodb.Table("user_history")
+
+x = table.scan()
+
+LOCAL_PATH = '/home/hadoop/'
+
+bucket_list = bucket.list()
+
+for l in bucket_list:
+	#print(l.key)
+	if(l.key=="ratings_1_1.txt"):
+		print(l.get_contents_to_filename(LOCAL_PATH+l.key))
+		#bucket.delete_key(l.key)
+		break
+
+with open("ratings_1_1.txt", "a") as f:
+	for i in range(0,len(x['Items'])):
+
+		string = str(x['Items'][i]["UserId"])+","+str(x['Items'][i]["coupon_Id"])+","+str(x['Items'][i]["rating"])+","+str(x['Items'][i]["timestamp"])
+		f.write(string)
+		f.write("\n")
+
+print("Datasets Updated")
+
+key = 'ratings_1_1.txt'
+fn = '/home/hadoop/ratings_1_1.txt'
+
+k = Key(bucket)
+
+k.key = key
+k.set_contents_from_filename(fn)
+k.make_public()
+
+os.remove(fn)
+
 stdin, stdout = sys.stdin, sys.stdout
 reload(sys)
 sys.stdin, sys.stdout = stdin, stdout
