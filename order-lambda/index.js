@@ -1,5 +1,5 @@
 var AWS = require('aws-sdk');
-var stripe = require("stripe")("sk_test_JCy56FAehenafOCX4DpsLILx");
+var stripe = require("stripe")("AWS");
 var jwt = require('jsonwebtoken');
 var request = require("request");
 
